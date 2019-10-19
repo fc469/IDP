@@ -19,25 +19,25 @@ def send_message_safe(MESSAGE):
     # ACK as not received if waiting > 1 sec from sending the message
     # as not received if waiting > 1 sec from sending the message
     # =============================================================================
-        
-    UDP_IP = "192.168.137.222" #changes everytime new connection is established
+
+    UDP_IP = "192.168.137.49" #changes everytime new connection is established
     UDP_PORT = 2390
-    
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) 
+
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.sendto(bytes(MESSAGE, "utf-8"), (UDP_IP, UDP_PORT))
     time_message_sent = time.time()
-    
+
     ACK = ''
-    
+
     while ACK== '':
         ACK, addr = sock.recvfrom(1024) # buffer size is 1024 bytes
         if(time.time() - time_message_sent > 1):
             return -1
-        
+
     FINISHED = ''
-    
+
     print('here')
-    
+
     while FINISHED== '':
         FINISHED, addr = sock.recvfrom(1024) # buffer size is 1024 bytes
         print('there')
@@ -54,23 +54,14 @@ def send_message_unsafe(MESSAGE):
     #
     # if ACK not received, Python script stuck in endless loop
     # =============================================================================
-    
+
     UDP_IP = "192.168.137.49" #changes everytime new connection is established
     UDP_PORT = 2390
-    
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) 
+
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.sendto(bytes(MESSAGE, "utf-8"), (UDP_IP, UDP_PORT))
-    
+
     ACK = ''
-    
+
     while ACK== '':
         ACK, addr = sock.recvfrom(1024) # buffer size is 1024 bytes
-
-    
-
-
-    
-
-
-    
-    
